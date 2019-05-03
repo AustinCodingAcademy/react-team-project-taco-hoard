@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class PetsList extends Component {
+export default class PetsList extends Component {
   state = {
     pets: []
   };
@@ -10,22 +10,15 @@ class PetsList extends Component {
   };
 
   fetchPets = async () => {
-    const response = await fetch("/api/pets");
-    const petsList = await response.json();
-    this.setState({ pets: petsList });
-    // this.showAllPets();
-  };
-
-  getPets = async e => {
-    e.preventDefault(); // Don't refresh the browser
-    // need to test api
-    await fetch("/api/pets", {
+    const response = await fetch("/api/pets", {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
     });
-    this.fetchPets();
+    const petsList = await response.json();
+    this.setState({ pets: petsList });
+    // this.showAllPets();
   };
 
   ShowAllPets = () => {
@@ -34,7 +27,10 @@ class PetsList extends Component {
       <tbody>
         {pets.map(pet => (
           <tr>
-            <td>{pet.id}</td>
+            <td>
+              {/* //  http://localhost:8080/pets/1 */}
+              <a href={"pets/".concat(pet.id)}>{pet.id}</a>
+            </td>
             <td>{pet.name}</td>
             <td>{pet.gender}</td>
           </tr>
@@ -62,5 +58,3 @@ class PetsList extends Component {
     );
   }
 }
-
-export default PetsList;

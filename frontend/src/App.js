@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import PetsList from "./container/PetsList";
+import PetForms from "./component/AddPetsForm";
 
 const Homes = () => {
   return <h1>Home Page</h1>;
@@ -27,7 +28,7 @@ class App extends React.Component {
           </header>
 
           <Route exact path="/" component={Homes} />
-          <Route exact path="/clients" component={Clients} />
+          <Route exact path="/pets/:id" component={PetForms} />
           <Route exact path="/pets" component={PetsList} />
           <Route exact path="/signout" component={SignOut} />
         </div>
