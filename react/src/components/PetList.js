@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 
- export default class PetsList extends Component {
+export default class PetsList extends Component {
   state = {
     pets: []
   };
 
-   componentDidMount = () => {
+  componentDidMount = () => {
     this.fetchPets();
   };
 
-   fetchPets = async () => {
+  fetchPets = async () => {
     const response = await fetch("/api/pets", {
       method: "GET",
       headers: {
@@ -21,7 +21,7 @@ import React, { Component } from "react";
     // this.showAllPets();
   };
 
-   ShowAllPets = () => {
+  ShowAllPets = () => {
     var { pets } = this.state;
     return (
       <tbody>
@@ -35,15 +35,14 @@ import React, { Component } from "react";
             <td>{pet.gender}</td>
           </tr>
         ))}
-        ;
       </tbody>
     );
   };
 
-   render() {
+  render() {
     // need to create table and populate
 
-     return (
+    return (
       <table>
         <thead>
           <tr>
@@ -53,7 +52,7 @@ import React, { Component } from "react";
           </tr>
         </thead>
 
-         <this.ShowAllPets />
+        <this.ShowAllPets />
       </table>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import AddPetForm from '../components/AddPetForm';
-import PetList from '../components/PetList';
+import AddPetForm from "../components/UpdatePetForm";
+import PetList from "../components/PetList";
 
 export default class Pets extends Component {
   state = {
@@ -16,18 +16,6 @@ export default class Pets extends Component {
     const petsList = await response.json();
     this.setState({ pets: petsList });
     // this.showAllPets();
-  };
-
-  getPets = async e => {
-    e.preventDefault(); // Don't refresh the browser
-    // need to test api
-    await fetch("/api/pets", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-    this.fetchPets();
   };
 
   ShowAllPets = () => {
@@ -50,10 +38,8 @@ export default class Pets extends Component {
     return (
       <div>
         <h1>Pets</h1>
-        <AddPetForm addPet={this.addPet} />
-        <PetList pets={this.state.pets} />
+        <PetList />
       </div>
     );
   }
 }
-
