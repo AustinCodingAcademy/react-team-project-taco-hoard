@@ -10,7 +10,7 @@ export default class PetsList extends Component {
   };
 
   fetchPets = async () => {
-    const response = await fetch("/api/pets", {
+    const response = await fetch(`/api/pets`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"

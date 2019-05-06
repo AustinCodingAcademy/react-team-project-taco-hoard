@@ -6,21 +6,41 @@ export default class AddPetForm extends React.Component {
     this.state = {
       currentPet: [],
       isChecked: false,
-      petName: ""
+      petName: "",
+      gender: ""
     };
   }
 
-  handleChange = e => {
-    e.preventDefault();
-    this.setState({ [e.target.Name]: e.target.value });
+  handleDelete = props => {
+    console.log("Pet was succesfully removed");
+    fetch(`/api/pets/${this.props.match.params.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    this.props.history.push("/pets");
   };
+
   handleInputChange = event => {
-    console.log("handleInputCHange was invoked");
+    console.log("Altered field was changed");
     this.setState({ isChecked: !this.state.isChecked });
   };
 
   handleCancel = () => {
-    console.log("Cancel button was clicked");
+    console.log("form was succesfully cancelled");
+    this.props.history.push("/pets");
+  };
+
+  handleSubmit = () => {
+    fetch(`/api/pets"}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    this.props.history.push("/pets");
   };
 
   componentDidMount = async props => {
@@ -38,15 +58,17 @@ export default class AddPetForm extends React.Component {
     this.setState({ isChecked: this.state.currentPet["altered"] });
 
     this.setState({ petName: this.state.currentPet["name"] });
+
+    this.setState({ gender: this.state.currentPet["gender"] });
   };
 
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input type="submit" value="Save" onSubmit={this.handleSubmit} />
+          <input type="submit" value="Save" />
           <input type="submit" value="Cancel" onClick={this.handleCancel} />
-          <input type="submit" value="Delete" onSubmit={this.handleSubmit} />
+          <input type="submit" value="Delete" onClick={this.handleDelete} />
           <br />
           {/* Pet Id field */}
           <label>
@@ -73,9 +95,10 @@ export default class AddPetForm extends React.Component {
           <label>
             Gender
             <select>
-              <option>{this.state.currentPet["gender"]}</option>
+              <option>{this.state.gender}</option>
               <option value="Female">Female</option>
               <option value="Male">Male</option>
+              onChange={e => this.setState({ petName: e.target.value })}
             </select>
           </label>
           <br />
