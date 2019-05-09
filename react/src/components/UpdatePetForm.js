@@ -3,14 +3,21 @@ import React from "react";
 export default class AddPetForm extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      currentPet: [],
-      isChecked: false,
-      petName: "",
-      gender: ""
+      editpetdata: {
+        id: 0,
+        altered: false,
+        name: "",
+        gender: "",
+        clientId: 0
+      },
+      alteredvalue: false,
+      petNamevalue: "",
+      gendervalue: "",
+      petidvalue: 0
     };
   }
-
   handleDelete = props => {
     console.log("Pet was succesfully removed");
     fetch(`/api/pets/${this.props.match.params.id}`, {
@@ -23,9 +30,22 @@ export default class AddPetForm extends React.Component {
     this.props.history.push("/pets");
   };
 
-  handleInputChange = event => {
-    console.log("Altered field was changed");
-    this.setState({ isChecked: !this.state.isChecked });
+  handleChange = event => {
+    console.log("Selected element " + event.target.name);
+
+    if (event.target.name === "pet-id-field") {
+      this.setState({ petidvalue: event.target.value });
+      console.log("new value is " + event.target.value);
+    } else if (event.target.name === "pet-field") {
+      this.setState({ petNamevalue: event.target.value });
+      console.log("new value is " + event.target.value);
+    } else if (event.target.name === "gender-field") {
+      this.setState({ gendervalue: event.target.value });
+      console.log("new value is " + event.target.value);
+    } else if (event.target.name === "altered-field") {
+      this.setState({ alteredvalue: !this.state.alteredvalue });
+      console.log("new value is " + this.state.alteredvalue);
+    }
   };
 
   handleCancel = () => {
@@ -34,12 +54,24 @@ export default class AddPetForm extends React.Component {
   };
 
   handleSubmit = () => {
-    fetch(`/api/pets"}`, {
+    fetch(`/api/pets`, {
       method: "PUT",
+      body: JSON.stringify({
+        id: this.state.petidvalue,
+        name: this.state.petNamevalue,
+        gender: this.state.gendervalue,
+        altered: this.state.alteredvalue,
+        clientId: this.state.editpetdata.clientId
+      }),
       headers: {
         "Content-Type": "application/json"
       }
     });
+
+    // const pet = await response.json();
+
+    // this.setState({ editpetdata: pet });
+
     this.props.history.push("/pets");
   };
 
@@ -51,32 +83,35 @@ export default class AddPetForm extends React.Component {
         "Content-Type": "application/json"
       }
     });
-    const petLists = await response.json();
+    const pet = await response.json();
 
-    this.setState({ currentPet: petLists });
+    this.setState({ editpetdata: pet });
 
-    this.setState({ isChecked: this.state.currentPet["altered"] });
+    this.setState({ petidvalue: this.state.editpetdata.id });
 
-    this.setState({ petName: this.state.currentPet["name"] });
+    this.setState({ petNamevalue: this.state.editpetdata.name });
 
-    this.setState({ gender: this.state.currentPet["gender"] });
+    this.setState({ gendervalue: this.state.editpetdata.gender });
+
+    this.setState({ alteredvalue: this.state.editpetdata.altered });
   };
 
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input type="submit" value="Save" />
-          <input type="submit" value="Cancel" onClick={this.handleCancel} />
-          <input type="submit" value="Delete" onClick={this.handleDelete} />
+          <input type="submit" value="Save" onClick={this.handleSubmit} />
+          <input type="button" value="Cancel" onClick={this.handleCancel} />
+          <input type="button" value="Delete" onClick={this.handleDelete} />
           <br />
           {/* Pet Id field */}
           <label>
             Pet ID:
             <input
-              name="Pet ID"
+              name="pet-id-field"
               type="text"
-              value={this.state.currentPet["id"]}
+              value={this.state.petidvalue}
+              onChange={this.handleChange}
             />
           </label>
           <br />
@@ -84,21 +119,21 @@ export default class AddPetForm extends React.Component {
           <label>
             Pet Name:
             <input
-              name="petName"
+              name="pet-field"
               type="text"
-              value={this.state.petName}
-              onChange={e => this.setState({ petName: e.target.value })}
+              value={this.state.petNamevalue}
+              // onChange="{e => this.setState({state.editpetdata.name: e.target.value })}"
+              onChange={this.handleChange}
             />
           </label>
           <br />
           {/* Gender field */}
           <label>
             Gender
-            <select>
-              <option>{this.state.gender}</option>
+            <select name="gender-field" onChange={this.handleChange}>
+              <option>{this.state.gendervalue}</option>
               <option value="Female">Female</option>
               <option value="Male">Male</option>
-              onChange={e => this.setState({ petName: e.target.value })}
             </select>
           </label>
           <br />
@@ -107,11 +142,11 @@ export default class AddPetForm extends React.Component {
           <label>
             Altered
             <input
-              name="altered"
+              name="altered-field"
               type="checkbox"
               //dynamic value
-              checked={this.state.isChecked}
-              onChange={this.handleInputChange}
+              checked={this.state.alteredvalue}
+              onChange={this.handleChange}
             />
           </label>
           <br />
