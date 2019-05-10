@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Table } from 'reactstrap';
 
 export default class PetsList extends Component {
   state = {
@@ -60,7 +61,7 @@ export default class PetsList extends Component {
     // need to create table and populate
 
     return (
-      <table>
+      <Table hover>
         <thead>
           <tr>
             <th>Id</th>
@@ -70,7 +71,7 @@ export default class PetsList extends Component {
         </thead>
 
         <this.ShowAllPets />
-      </table>
+      </Table>
     );
   }
 }
