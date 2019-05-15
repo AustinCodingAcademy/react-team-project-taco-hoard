@@ -15,7 +15,8 @@ export default class AddPetForm extends React.Component {
       alteredvalue: false,
       petNamevalue: "",
       gendervalue: "",
-      petidvalue: 0
+      petidvalue: 0,
+      responseStatus: 0
     };
   }
   handleDelete = props => {
@@ -48,13 +49,13 @@ export default class AddPetForm extends React.Component {
     }
   };
 
-  handleCancel = () => {
+  handleCancel = async () => {
     console.log("form was succesfully cancelled");
     this.props.history.push("/pets");
   };
 
-  handleSubmit = () => {
-    fetch(`/api/pets`, {
+  handleSubmit = async () => {
+    const response = await fetch(`/api/pets`, {
       method: "PUT",
       body: JSON.stringify({
         id: this.state.petidvalue,
@@ -68,11 +69,12 @@ export default class AddPetForm extends React.Component {
       }
     });
 
-    // const pet = await response.json();
+    console.log(response);
+    const statusCode = await response.status;
+    console.log(statusCode);
+    this.setState({ responseStatus: statusCode });
 
-    // this.setState({ editpetdata: pet });
-
-    this.props.history.push("/pets");
+    //  this.props.history.push("/pets");
   };
 
   componentDidMount = async props => {
@@ -87,16 +89,21 @@ export default class AddPetForm extends React.Component {
 
     this.setState({ editpetdata: pet });
 
-    this.setState({ petidvalue: this.state.editpetdata.id });
-
-    this.setState({ petNamevalue: this.state.editpetdata.name });
-
-    this.setState({ gendervalue: this.state.editpetdata.gender });
-
-    this.setState({ alteredvalue: this.state.editpetdata.altered });
+    this.setState({
+      petidvalue: this.state.editpetdata.id,
+      petNamevalue: this.state.editpetdata.name,
+      gendervalue: this.state.editpetdata.gender,
+      alteredvalue: this.state.editpetdata.altered
+    });
   };
 
   render() {
+    const statusCode = this.state.responseStatus;
+
+    if (statusCode !== 200 && statusCode !== 0) {
+      return <div>Oops!! Something went wrong!!</div>;
+    }
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

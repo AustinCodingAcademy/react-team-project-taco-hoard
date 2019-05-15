@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Table } from 'reactstrap';
-import { Link } from "react-router-dom"
+import { Table } from "reactstrap";
+import { Link } from "react-router-dom";
 
 export default class PetsList extends Component {
   state = {
@@ -46,7 +46,7 @@ export default class PetsList extends Component {
                <a href="#" data-petid={pet.id} onClick={this.navigate}>{pet.id}</a> Yousiff's code
               <a href={"pets/".concat(pet.id)}>{pet.id}</a> - my code
               */}
-              <Link to={`pets/${pets.id}`}>{pet.id}</Link>
+              <Link to={`pets/${pet.id}`}>{pet.id}</Link>
             </td>
             <td>{pet.name}</td>
             <td>{pet.gender}</td>
