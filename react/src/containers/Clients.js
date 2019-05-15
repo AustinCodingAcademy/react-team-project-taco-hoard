@@ -40,7 +40,9 @@ export default class Clients extends Component {
       <div>
         <h1>Clients</h1>
         <AddClientForm addClient={this.addClient} />
-        <ClientList clients={this.state.clients} />
+        <h2>Client List</h2>
+        <ClientList />
+        {/* <ClientList clients={this.state.clients} /> */}
       </div>
     )
   }
