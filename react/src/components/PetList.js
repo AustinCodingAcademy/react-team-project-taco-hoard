@@ -5,13 +5,25 @@ import { Link } from "react-router-dom";
 export default class PetsList extends Component {
   state = {
     pets: []
+    loggedIn: !!localStorage.getItem('JWT_TOKEN')
   };
 
   componentDidMount = () => {
-    this.fetchPets();
+    try {
+      const clientResponse = await fetch('/api/clients', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+        }
+      })
+      const pets = await clientResponse.json();
+      this.setState({ pets: pets});
+    } catch(error){
+      console.error(error)
+    }
   };
 
   fetchPets = async () => {
+    
     const response = await fetch(`/api/pets`, {
       method: "GET",
       headers: {
