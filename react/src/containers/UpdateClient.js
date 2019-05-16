@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import AddPetForm from "../components/AddPetForm";
-import PetList from "../components/PetList";
+import UpdateClientForm from "../components/UpdateClientForm";
+import ClientList from "../components/ClientList";
 
-export default class UpdatePetsForm extends React.Component {
+export default class UpdateClientForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPet: [],
-      isChecked: false
+      currentClient: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,77 +25,72 @@ export default class UpdatePetsForm extends React.Component {
     // event.preventDefault();
   }
 
-  handleInputChange(event) {
-    console.log("handleInputCHange was invoked");
-    this.setState({ isChecked: !this.state.isChecked });
-  }
 
   componentDidMount = async () => {
     // need to check how to dynamically pass the pet id
-    const response = await fetch(`/api/pets/${this.props.match.params.id}`, {
+    const response = await fetch(`/api/clients/${this.props.match.params.id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
     });
-    const petLists = await response.json();
+    const clientLists = await response.json();
 
-    this.setState({ currentPet: petLists });
+    this.setState({ currentclient: clientLists });
 
-    this.setState({ isChecked: this.state.currentPet["altered"] });
   };
 
   render = () => {
     return (
       <div>
-        <h1>Pets</h1>
+        <h1>Clients</h1>
         <form onSubmit={this.handleSubmit}>
           <input type="submit" value="Save" onSubmit={this.handleSubmit} />
           <input type="submit" value="Cancel" onClick={this.handleSubmit} />
           <input type="submit" value="Delete" onSubmit={this.handleSubmit} />
           <br />
-          {/* Pet Id field */}
+          {/* Client Id field */}
           <label>
-            Pet ID:
+            Client ID:
             <input
-              name="Pet ID"
+              name="Client ID"
               type="text"
-              value={this.state.currentPet["id"]}
+              value={this.state.currentClient["id"]}
               onChange={this.handleChange}
             />
           </label>
           <br />
           {/* Pet Name field */}
           <label>
-            Pet Name:
+            Client Name:
             <input
-              name="petName"
+              name="clientName"
               type="text"
-              value={this.state.currentPet["name"]}
+              value={this.state.currentClient["name"]}
               onChange={this.handleChange}
             />
           </label>
           <br />
           {/* Gender field */}
           <label>
-            Gender
-            <select>
-              <option>{this.state.currentPet["gender"]}</option>
-              <option value="Female">Female</option>
-              <option value="Male">Male</option>
-            </select>
+            Address
+            <input
+              name="address"
+              type="text"
+              value={this.state.currentclient["address"]}
+              onChange={this.handleChange}
+            />
           </label>
           <br />
 
           {/* Altered field */}
           <label>
-            Altered
+            Phone Number
             <input
-              name="altered"
-              type="checkbox"
-              //dynamic value
-              checked={this.state.isChecked}
-              onChange={this.handleInputChange}
+              name="phoneNumber"
+              type="text"
+              value={this.state.currentclient["phoneNumber"]}
+              onChange={this.handleChange}
             />
           </label>
           <br />

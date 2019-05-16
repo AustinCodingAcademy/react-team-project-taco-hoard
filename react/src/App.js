@@ -4,6 +4,8 @@ import LogIn from "./containers/LogIn";
 import AddClient from "./containers/AddClient";
 import Pets from "./containers/Pets";
 import UpdatePetForm from "./components/UpdatePetForm";
+import UpdateClientForm from "./components/UpdateClientForm"
+
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 // import { LinkContainer } from 'react-router-bootstrap';
@@ -85,6 +87,7 @@ export default class App extends React.Component {
         <Route exact path="/pets/:id" component={UpdatePetForm} />
         <Route exact path="/pets" component={Pets} />
         <Route exact path="/clients/new" component={AddClient} />
+        <Route exact path="/clients/:id" component={UpdateClientForm} />
       </BrowserRouter>
     );
   };
