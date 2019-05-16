@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default class PetsList extends Component {
   state = {
-    pets: []
+    pets: [],
     loggedIn: !!localStorage.getItem('JWT_TOKEN')
   };
 
