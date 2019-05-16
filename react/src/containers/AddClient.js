@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import AddClientForm from '../components/AddClientForm';
 import ClientList from '../components/ClientList';
+import { Redirect } from 'react-router-dom';
 
 export default class Clients extends Component {
   state = {
-    message: ''
+    message: '',
+    loggedIn: !!localStorage.getItem('JWT_TOKEN')
   }
   addClient = async (e) => {
     e.preventDefault();
@@ -15,7 +17,8 @@ export default class Clients extends Component {
     await fetch('/api/clients', {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
       },
       body: JSON.stringify({
         "name": e.target.elements.name.value,
@@ -28,6 +31,7 @@ export default class Clients extends Component {
   }
 
   render() {
+    if (!this.state.loggedIn) return <Redirect to="/login" />;
     return (
       <div>
         <h1>Add A Client</h1>

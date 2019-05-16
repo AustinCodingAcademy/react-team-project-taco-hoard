@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 export default class ClientList extends Component {
   state = {
-    clients: []
+    clients: [],
+    loggedIn: !!localStorage.getItem('JWT_TOKEN')
   };
 
 
@@ -16,7 +17,8 @@ export default class ClientList extends Component {
     const response = await fetch(`/api/clients`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
       }
     });
 
@@ -62,6 +64,7 @@ export default class ClientList extends Component {
 
 
   render() {
+    if (!this.state.loggedIn) return <Redirect to="/login" />;
     return (
       <Table hover>
         <thead>
