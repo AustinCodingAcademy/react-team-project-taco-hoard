@@ -37,12 +37,29 @@ export default class Clients extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Clients</h1>
-        <AddClientForm addClient={this.addClient} />
-        <h2>Client List</h2>
-        <ClientList />
-        {/* <ClientList clients={this.state.clients} /> */}
+      <div className="container py-5">
+        <div className="row">
+          <div className="col-8">
+            <div className="card border-0 shadow-sm">
+              <div className="card-header">
+                <h1>Clients</h1>
+              </div>
+              <div className="card-body">  
+                <ClientList />
+              </div>
+            </div>
+          </div>
+          <div className="col-4">
+            <div className="card border-0 shadow-sm">
+              <div className="card-header">
+                <h2>Add a New Client</h2>
+              </div>
+              <div className="card-body">
+                <AddClientForm addClient={this.addClient} />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
