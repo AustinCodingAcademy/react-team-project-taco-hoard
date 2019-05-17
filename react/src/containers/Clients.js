@@ -38,8 +38,8 @@ export default class Clients extends Component {
   render() {
     return (
       <div>
-        {/* <h1>Clients</h1>
-        <AddClientForm addClient={this.addClient} /> */}
+        <h1>Clients</h1>
+        <AddClientForm addClient={this.addClient} />
         <h2>Client List</h2>
         <ClientList />
         {/* <ClientList clients={this.state.clients} /> */}

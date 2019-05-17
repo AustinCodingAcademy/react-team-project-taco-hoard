@@ -30,10 +30,10 @@ export default class App extends React.Component {
               {" "}
               <Link to="/pets">Pets </Link>{" "}
             </Nav.Link>
-            {/* <Nav.Link>
+            <Nav.Link>
               {" "}
               <Link to="/newclient">New Client </Link>{" "}
-            </Nav.Link> */}
+            </Nav.Link>
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2 border-0 rounded-sm" />
