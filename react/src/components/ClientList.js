@@ -4,11 +4,23 @@ import { Link } from "react-router-dom";
 
 export default class ClientList extends Component {
   state = {
-    clients: []
+    clients: [],
+    loggedIn: !!localStorage.getItem('JWT_TOKEN')
   };
 
 
   componentDidMount = () => {
+    try {
+      const clientResponse = await fetch('/api/clients', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+        }
+      })
+      const pets = await clientResponse.json();
+      this.setState({ clients: clients});
+    } catch(error){
+      console.error(error)
+    }
     this.fetchClients();
   };
 
