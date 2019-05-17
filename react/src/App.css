@@ -1,3 +1,31 @@
+html, body {
+  min-height: 100%;
+}
+
+body {
+  background-image: linear-gradient(to top left, #08ddc1 40%, #38a9ff);
+}
+
 .nav-link a {
   color: white !important;
+}
+
+#masthead {
+  background-color: #3f4257;
+}
+
+#masthead .navbar-brand {
+  color: white;
+  font-weight: 500;
+}
+
+#logo {
+  color: #08ddc1;
+  transform: rotate(45deg);
+}
+
+/* Button Color Overrides */
+.btn.btn-primary {
+  background-color: #38a9ff; 
+  border-color: #38a9ff;
 }

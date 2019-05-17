@@ -8,19 +8,6 @@ import AddPetsForm from "./components/AddPetsForm";
 import UpdatePetForm from "./components/UpdatePetForm";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
-// import { LinkContainer } from 'react-router-bootstrap';
-import {
-  Collapse,
-  NavItem,
-  NavbarToggler,
-  NavbarBrand,
-  Dropbox,
-  DropboxItem,
-  DropdownToggle,
-  DropdownMenu,
-  NavLink,
-  UncontrolledDropdown
-} from "reactstrap";
 import "./App.css";
 
 export default class App extends React.Component {
@@ -28,9 +15,8 @@ export default class App extends React.Component {
     return (
       <BrowserRouter>
         {/* Using bootstrap */}
-
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand>ENDLESS PAWSIBILITES</Navbar.Brand>
+        <Navbar id="masthead">
+          <Navbar.Brand><i id="logo" className="fa fa-paw"></i> ENDLESS PAWSIBILITES</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link>
               {" "}
@@ -50,8 +36,8 @@ export default class App extends React.Component {
             </Nav.Link>
           </Nav>
           <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-info">Search</Button>
+            <FormControl type="text" placeholder="Search" className="mr-sm-2 border-0 rounded-sm" />
+            <Button variant="outline-primary"><i className="fa fa-search"></i></Button>
           </Form>
         </Navbar>
 
