@@ -7,13 +7,13 @@ export default class AddPetForm extends React.Component {
     this.state = {
       editpetdata: {
         id: 0,
-        altered: false,
+        isaltered: false,
         name: "",
         gender: "",
         clientId: 0
       },
-      alteredvalue: false,
-      petNamevalue: "",
+      isaltered: false,
+      petnamevalue: "",
       gendervalue: "",
       petidvalue: 0,
       responseStatus: 0
@@ -31,23 +31,23 @@ export default class AddPetForm extends React.Component {
     this.props.history.push("/pets");
   };
 
-  handleChange = event => {
-    console.log("Selected element " + event.target.name);
+  // handleChange = event => {
+  //   console.log("Selected element " + event.target.name);
 
-    if (event.target.name === "pet-id-field") {
-      this.setState({ petidvalue: event.target.value });
-      console.log("new value is " + event.target.value);
-    } else if (event.target.name === "pet-field") {
-      this.setState({ petNamevalue: event.target.value });
-      console.log("new value is " + event.target.value);
-    } else if (event.target.name === "gender-field") {
-      this.setState({ gendervalue: event.target.value });
-      console.log("new value is " + event.target.value);
-    } else if (event.target.name === "altered-field") {
-      this.setState({ alteredvalue: !this.state.alteredvalue });
-      console.log("new value is " + this.state.alteredvalue);
-    }
-  };
+  //   if (event.target.name === "pet-id-field") {
+  //     this.setState({ petidvalue: event.target.value });
+  //     console.log("new value is " + event.target.value);
+  //   } else if (event.target.name === "pet-field") {
+  //     this.setState({ petNamevalue: event.target.value });
+  //     console.log("new value is " + event.target.value);
+  //   } else if (event.target.name === "gender-field") {
+  //     this.setState({ gendervalue: event.target.value });
+  //     console.log("new value is " + event.target.value);
+  //   } else if (event.target.name === "altered-field") {
+  //     this.setState({ alteredvalue: !this.state.alteredvalue });
+  //     console.log("new value is " + this.state.alteredvalue);
+  //   }
+  // };
 
   handleCancel = async () => {
     console.log("form was succesfully cancelled");
@@ -59,9 +59,9 @@ export default class AddPetForm extends React.Component {
       method: "PUT",
       body: JSON.stringify({
         id: this.state.petidvalue,
-        name: this.state.petNamevalue,
+        name: this.state.petnamevalue,
         gender: this.state.gendervalue,
-        altered: this.state.alteredvalue,
+        isaltered: this.state.isaltered,
         clientId: this.state.editpetdata.clientId
       }),
       headers: {
@@ -91,9 +91,9 @@ export default class AddPetForm extends React.Component {
 
     this.setState({
       petidvalue: this.state.editpetdata.id,
-      petNamevalue: this.state.editpetdata.name,
+      petnamevalue: this.state.editpetdata.name,
       gendervalue: this.state.editpetdata.gender,
-      alteredvalue: this.state.editpetdata.altered
+      isaltered: this.state.editpetdata.isaltered
     });
   };
 
@@ -118,7 +118,7 @@ export default class AddPetForm extends React.Component {
               name="pet-id-field"
               type="text"
               value={this.state.petidvalue}
-              onChange={this.handleChange}
+              onChange={e => this.setState({ petidvalue: e.target.value })}
             />
           </label>
           <br />
@@ -128,16 +128,19 @@ export default class AddPetForm extends React.Component {
             <input
               name="pet-field"
               type="text"
-              value={this.state.petNamevalue}
+              value={this.state.petnamevalue}
               // onChange="{e => this.setState({state.editpetdata.name: e.target.value })}"
-              onChange={this.handleChange}
+              onChange={e => this.setState({ petnamevalue: e.target.value })}
             />
           </label>
           <br />
           {/* Gender field */}
           <label>
             Gender
-            <select name="gender-field" onChange={this.handleChange}>
+            <select
+              name="gender-field"
+              onChange={e => this.setState({ gendervalue: e.target.value })}
+            >
               <option>{this.state.gendervalue}</option>
               <option value="Female">Female</option>
               <option value="Male">Male</option>
@@ -152,8 +155,10 @@ export default class AddPetForm extends React.Component {
               name="altered-field"
               type="checkbox"
               //dynamic value
-              checked={this.state.alteredvalue}
-              onChange={this.handleChange}
+              checked={this.state.isaltered}
+              onChange={e =>
+                this.setState({ isaltered: !this.state.isaltered })
+              }
             />
           </label>
           <br />

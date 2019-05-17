@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Form, FormGroup, label, Input, FormText} from 'reactstrap';
+import React, { Component } from "react";
+import { Button, Form, FormGroup, label, Input, FormText } from "reactstrap";
 
 export default class AddClientForm extends Component {
   render() {

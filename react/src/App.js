@@ -1,8 +1,10 @@
 import React from "react";
-import Clients from "./containers/Clients";
 import LogIn from "./containers/LogIn";
-import AddClient from "./containers/AddClient";
+import Clients from "./components/ClientList";
+import AddClientForm from "./components/AddClientForm";
+import UpdateClientForm from "./components/UpdateClientForm";
 import Pets from "./containers/Pets";
+import AddPetsForm from "./components/AddPetsForm";
 import UpdatePetForm from "./components/UpdatePetForm";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
@@ -30,7 +32,7 @@ export default class App extends React.Component {
             </Nav.Link>
             {/* <Nav.Link>
               {" "}
-              <Link to="/clients/new">New Client </Link>{" "}
+              <Link to="/newclient">New Client </Link>{" "}
             </Nav.Link> */}
           </Nav>
           <Form inline>
@@ -42,9 +44,11 @@ export default class App extends React.Component {
         <Route exact path="/" component={LogIn} />
         <Route exact path="/login" component={LogIn} />
         <Route exact path="/clients" component={Clients} />
+        <Route exact path="/newclient" component={AddClientForm} />
+        <Route exact path="/clients/:id" component={UpdateClientForm} />
         <Route exact path="/pets/:id" component={UpdatePetForm} />
         <Route exact path="/pets" component={Pets} />
-        <Route exact path="/clients/new" component={AddClient} />
+        <Route exact path="/addpet" component={AddPetsForm} />
       </BrowserRouter>
     );
   };
