@@ -1,4 +1,5 @@
 import React from "react";
+import AddPetsForm from "./AddPetsForm";
 
 export default class UpdateClientForm extends React.Component {
   constructor(props) {
@@ -11,9 +12,9 @@ export default class UpdateClientForm extends React.Component {
         address: "",
         phonenumber: ""
       },
-      clientNamevalue: "",
+      clientnamevalue: "",
       addressvalue: "",
-      phonenumbervalue:"",
+      phonenumbervalue: "",
       clientidvalue: 0,
       responseStatus: 0
     };
@@ -30,27 +31,15 @@ export default class UpdateClientForm extends React.Component {
     this.props.history.push("/clients");
   };
 
-  handleChange = event => {
-    console.log("Selected element " + event.target.name);
-
-    if (event.target.name === "client-id-field") {
-      this.setState({ clientidvalue: event.target.value });
-      console.log("new value is " + event.target.value);
-    } else if (event.target.name === "name-field") {
-      this.setState({ clientNamevalue: event.target.value });
-      console.log("new value is " + event.target.value);
-    } else if (event.target.name === "phoneNumber-field") {
-      this.setState({ phonenumbervalue: event.target.value });
-      console.log("new value is " + event.target.value);
-    } else if (event.target.name === "address-field") {
-      this.setState({ addressvalue: event.target.value });
-      console.log("new value is " + event.target.value);
-    } 
-  };
-
   handleCancel = async () => {
     console.log("form was succesfully cancelled");
     this.props.history.push("/clients");
+  };
+
+  showAddPetForm = () => {
+    //  this.props.history.push("/addpet");
+    this.props.history.push("/addpet", { clientid: this.state.clientidvalue });
+    // return <AddPetsForm data={this.state} />;
   };
 
   handleSubmit = async () => {
@@ -89,7 +78,7 @@ export default class UpdateClientForm extends React.Component {
 
     this.setState({
       clientidvalue: this.state.editclientdata.id,
-      clientNamevalue: this.state.editclientdata.name,
+      clientnamevalue: this.state.editclientdata.name,
       addressvalue: this.state.editclientdata.address,
       phonenumbervalue: this.state.editclientdata.phoneNumber
     });
@@ -108,6 +97,7 @@ export default class UpdateClientForm extends React.Component {
           <input type="submit" value="Save" onClick={this.handleSubmit} />
           <input type="button" value="Cancel" onClick={this.handleCancel} />
           <input type="button" value="Delete" onClick={this.handleDelete} />
+          <input type="button" value="Add Pet" onClick={this.showAddPetForm} />
           <br />
           {/* Pet Id field */}
           <label>
@@ -116,19 +106,19 @@ export default class UpdateClientForm extends React.Component {
               name="client-id-field"
               type="text"
               value={this.state.clientidvalue}
-              onChange={this.handleChange}
+              // onChange={e => this.setState({ clientidvalue: e.target.value })}
             />
           </label>
           <br />
-          {/* Pet Name field */}
+          {/* Client Name field */}
           <label>
             Client Name:
             <input
               name="name-field"
               type="text"
-              value={this.state.clientNamevalue}
+              value={this.state.clientnamevalue}
               // onChange="{e => this.setState({state.editpetdata.name: e.target.value })}"
-              onChange={this.handleChange}
+              onChange={e => this.setState({ clientnamevalue: e.target.value })}
             />
           </label>
           <br />
@@ -140,9 +130,8 @@ export default class UpdateClientForm extends React.Component {
               type="text"
               value={this.state.addressvalue}
               // onChange="{e => this.setState({state.editpetdata.name: e.target.value })}"
-              onChange={this.handleChange}
+              onChange={e => this.setState({ addressvalue: e.target.value })}
             />
-
           </label>
           <br />
 
@@ -154,7 +143,9 @@ export default class UpdateClientForm extends React.Component {
               type="text"
               value={this.state.phonenumbervalue}
               // onChange="{e => this.setState({state.editpetdata.name: e.target.value })}"
-              onChange={this.handleChange}
+              onChange={e =>
+                this.setState({ phonenumbervalue: e.target.value })
+              }
             />
           </label>
           <br />
@@ -163,4 +154,3 @@ export default class UpdateClientForm extends React.Component {
     );
   }
 }
-

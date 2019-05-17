@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Form, FormGroup, label, Input, FormText} from 'reactstrap';
+import React, { Component } from "react";
+import { Button, Form, FormGroup, label, Input, FormText } from "reactstrap";
 
 export default class AddClientForm extends Component {
   render() {
@@ -7,7 +7,7 @@ export default class AddClientForm extends Component {
       <Form onSubmit={this.props.addClient}>
         <FormGroup>
           <label>Name</label>
-          <input name = "name" />
+          <input name="name" />
         </FormGroup>
         <FormGroup>
           <label>Address</label>
@@ -22,7 +22,6 @@ export default class AddClientForm extends Component {
         </FormGroup>
       </Form>
 
-      
       // <form onSubmit={this.props.addClient}>
       //   <label>
       //     name
@@ -38,7 +37,6 @@ export default class AddClientForm extends Component {
       //   </label>
       //   <input type="submit"/>
       // </form>
-      
-    )
+    );
   }
 }
