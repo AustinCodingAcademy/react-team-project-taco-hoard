@@ -16,3 +16,8 @@ log/
 target/
 
 spring-app.db
+
+# Metadata
+.metadata
+.metadata/
+.dbeaver-data-sources.xml
