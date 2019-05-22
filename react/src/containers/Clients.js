@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import AddClientForm from "../components/AddClientForm";
 import ClientList from "../components/ClientList";
+import { Redirect } from "react-router-dom";
 
 export default class Clients extends Component {
   state = {
-    clients: []
+    clients: [],
+    loggedIn: !!localStorage.getItem("JWT_TOKEN")
   };
 
   componentDidMount = async () => {
-    const response = await fetch("/api/clients", { method: "GET" });
+    const response = await fetch("/api/clients", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("JWT_TOKEN")}`
+      }
+    });
     const clients = await response.json();
     this.setState({ clients: clients });
   };
@@ -22,7 +28,8 @@ export default class Clients extends Component {
     await fetch("/api/clients", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("JWT_TOKEN")}`
       },
       body: JSON.stringify({
         name: e.target.elements.name.value,

@@ -15,7 +15,8 @@ export default class PetsList extends Component {
     const response = await fetch(`/api/pets`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('JWT_TOKEN')}`
       }
     });
 

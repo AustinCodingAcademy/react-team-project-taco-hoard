@@ -24,7 +24,8 @@ export default class UpdateClientForm extends React.Component {
     fetch(`/api/clients/${this.props.match.params.id}`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
       }
     });
 
@@ -47,12 +48,13 @@ export default class UpdateClientForm extends React.Component {
       method: "PUT",
       body: JSON.stringify({
         id: this.state.clientidvalue,
-        name: this.state.clientNamevalue,
+        name: this.state.clientnamevalue,
         address: this.state.addressvalue,
         phoneNumber: this.state.phonenumbervalue
       }),
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
       }
     });
 
@@ -69,7 +71,8 @@ export default class UpdateClientForm extends React.Component {
     const response = await fetch(`/api/clients/${this.props.match.params.id}`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
       }
     });
     const client = await response.json();
