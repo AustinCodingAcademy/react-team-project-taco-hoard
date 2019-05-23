@@ -109,7 +109,7 @@ export default class AddPetsForm extends Component {
           </form>
           </div>
           <div className="card-footer">
-            <input className="btn btn-success mr-2" type="submit" value="Save" />
+            <input className="btn btn-success mr-2" type="submit" value="Save" onClick={this.handleSubmit} />
             <input className="btn btn-secondary" type="button" value="Cancel" onClick={this.handleCancel} />
           </div>
         </div>
