@@ -41,7 +41,7 @@ export default class LogIn extends Component {
             <h2>Sign In</h2>
           </div>
           <div className="card-body">
-            <Form  onSubmit={this.onSubmit} inline className="form">
+            <Form  onSubmit={this.onSubmit} className="form">
               <FormGroup>
                 <Label>Username</Label>
                 <Input name="username" />

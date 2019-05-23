@@ -56,73 +56,63 @@ export default class AddPetsForm extends Component {
   };
   render() {
     return (
-      <div>
-        <h1>Add New Pet</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input type="submit" value="Save" />
-          <input type="button" value="Cancel" onClick={this.handleCancel} />
-          <br />
-          {/* Client Name field */}
-          <label>
-            Client :
-            <input
-              name="client-name"
-              type="text"
-              value={this.state.clientname}
-            />
-          </label>
-          <br />
-          {/* Pet Id field
-<label>
-Pet ID:
-<input
-name="pet-id-field"
-type="text"
-value={this.state.petidvalue}
-onChange={e => this.setState({ value: e.target.value })}
-/>
-</label>
-<br /> */}
-          {/* Pet Name field */}
-          <label>
-            Pet Name:
-            <input
-              name="petname"
-              type="text"
-              value={this.state.petname}
-              // onChange="{e => this.setState({state.editpetdata.name: e.target.value })}"
-              onChange={e => this.setState({ petname: e.target.value })}
-            />
-          </label>
-          <br />
-          {/* Gender field */}
-          <label>
-            Gender
-            <select
-              name="petgender"
-              onChange={e => this.setState({ petgender: e.target.value })}
-            >
-              <option>{this.state.petgender}</option>
-              <option value="Female">Female</option>
-              <option value="Male">Male</option>
-            </select>
-          </label>
-          <br />
-          {/* Altered field */}
-          <label>
-            Altered
-            <input
-              name="altered"
-              type="checkbox"
-              //dynamic value
-              checked={this.state.isaltered}
-              onChange={e =>
-                this.setState({ isaltered: !this.state.isaltered })
-              }
-            />
-          </label>
-          <br />
-        </form>
+      <div className="container py-5">
+        <div className="card">
+          <div className="card-header">
+            <h1>Add New Pet</h1>
+          </div>
+          <div className="card-body">
+            <form onSubmit={this.handleSubmit}>
+            {/* Client Name field */}
+            <div className="form-group">
+              <label for="client-name">Client</label>
+              <input id="client-name" className="form-control" name="client-name" type="text" readonly="true"
+                  value={this.state.clientname}
+                />
+            </div>
+            {/* Pet Name field */}
+            <div className="form-group">
+              <label for="pet-name">Pet Name</label>
+              <input id="pet-name" className="form-control"
+                name="petname"
+                type="text"
+                value={this.state.petname}
+                // onChange="{e => this.setState({state.editpetdata.name: e.target.value })}"
+                onChange={e => this.setState({ petname: e.target.value })}
+              />
+            </div>
+            {/* Gender field */}
+            <div className="form-group">
+              <label for="pet-gender">Gender</label>
+              <select id="pet-gender" className="form-control custom-select"
+                  name="petgender"
+                  onChange={e => this.setState({ petgender: e.target.value })}
+                >
+                  <option>{this.state.petgender}</option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                </select>
+            </div>
+            {/* Altered field */}
+            <div className="custom-control custom-checkbox">
+            <input id="altered" className="custom-control-input"
+                name="altered"
+                type="checkbox"
+                //dynamic value
+                checked={this.state.isaltered}
+                onChange={e =>
+                  this.setState({ isaltered: !this.state.isaltered })
+                }
+              />
+              <label for="altered" className="custom-control-label">Altered</label>
+            </div>
+          </form>
+          </div>
+          <div className="card-footer">
+            <input className="btn btn-success mr-2" type="submit" value="Save" />
+            <input className="btn btn-secondary" type="button" value="Cancel" onClick={this.handleCancel} />
+          </div>
+        </div>
       </div>
     );
   }
