@@ -34,6 +34,11 @@ export default class AddPetsForm extends Component {
       clientid: client["id"]
     });
   };
+  
+  handleCancel = async () => {
+    this.props.history.push("/pets");
+  }
+
   // {"id":1,"name":"Petco1","gender":"Male","altered":false,"clientId":4}
   handleSubmit = async e => {
     e.preventDefault();
