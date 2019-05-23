@@ -34,6 +34,11 @@ export default class AddPetsForm extends Component {
       clientid: client["id"]
     });
   };
+  
+  handleCancel = async () => {
+    this.props.history.push("/pets");
+  }
+
   // {"id":1,"name":"Petco1","gender":"Male","altered":false,"clientId":4}
   handleSubmit = async e => {
     e.preventDefault();
@@ -109,7 +114,7 @@ export default class AddPetsForm extends Component {
           </form>
           </div>
           <div className="card-footer">
-            <input className="btn btn-success mr-2" type="submit" value="Save" />
+            <input className="btn btn-success mr-2" type="submit" value="Save" onClick={this.handleSubmit} />
             <input className="btn btn-secondary" type="button" value="Cancel" onClick={this.handleCancel} />
           </div>
         </div>
