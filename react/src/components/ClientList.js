@@ -68,18 +68,26 @@ export default class ClientList extends Component {
   render() {
     if (!this.state.loggedIn) return <Redirect to="/login" />;
     return (
-      <Table hover>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Address</th>
-          </tr>
-        </thead>
+      <div className="container py-5">
+        <div className="card">
+          <div className="card-header">
+            <h1>Clients</h1>
+          </div>
+          <div className="card-body">
+            <Table hover>
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Address</th>
+                </tr>
+              </thead>
 
-        <this.ShowAllClients />
-      </Table>
-
+              <this.ShowAllClients />
+            </Table>
+          </div>
+        </div>
+      </div>
       // <ul>
       //   {
       //      this.props.clients.map(client => <li key={client.id} >{client.name} <a href="#">delete</a></li>)

@@ -44,7 +44,7 @@ export default class Clients extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h1>Clients</h1>
         <AddClientForm addClient={this.addClient} />
         <h2>Client List</h2>
